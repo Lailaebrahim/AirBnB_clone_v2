@@ -13,7 +13,7 @@ class FileStorage:
         if cls is None:
             return FileStorage.__objects
         else:
-            obj_dict = {key: val for key, val in FileStorage.__objects.items() if val["__class__"] == cls}
+            obj_dict = {key: val for key, val in FileStorage.__objects.items() if val.__class__ == cls}
             return obj_dict
 
     def new(self, obj):
