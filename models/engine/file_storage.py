@@ -11,10 +11,10 @@ class FileStorage:
     def all(self, cls=None):
         """hat returns the list of objects of one type of class- it’s an optional filtering"""
         if cls is None:
-            return list(FileStorage.__objects.values())
+            return FileStorage.__objects
         else:
-            obj_list = [obj for obj in FileStorage.__objects.values() if obj["__class__"] == cls]
-            return obj_list
+            obj_dict = {key: val for key, val in FileStorage.__objects.items() if val["__class__"] == cls}
+            return obj_dict
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
