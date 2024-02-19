@@ -2,7 +2,6 @@
 """ Console Module """
 import cmd
 import sys
-from os import getenv
 from models.base_model import BaseModel
 from models.__init__ import storage
 from models.user import User
@@ -123,8 +122,8 @@ class HBNBCommand(cmd.Cmd):
         elif params[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
-        new_instance = HBNBCommand.classes[params[0]]()
         for param in params[1:]:
+            kw = {}
             try:
                 attr, value = param.split("=")
                 attr = attr.strip()
@@ -136,11 +135,13 @@ class HBNBCommand(cmd.Cmd):
                         value = float(value)
                     else:
                         value = int(value)
+                kw[attr] = value
             except ValueError:
                 continue
-            setattr(new_instance, attr, value)
-        print(new_instance.id)
+        new_instance = HBNBCommand.classes[params[0]](**kw)
         storage.save()
+        print(new_instance.id)
+
 
     def help_create(self):
         """ Help information for the create method """
