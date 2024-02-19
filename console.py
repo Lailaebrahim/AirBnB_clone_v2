@@ -124,7 +124,6 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
         new_instance = HBNBCommand.classes[params[0]]()
-        storage.save()
         for param in params[1:]:
             try:
                 attr, value = param.split("=")
@@ -138,7 +137,7 @@ class HBNBCommand(cmd.Cmd):
                     else:
                         value = int(value)
             except ValueError:
-                continue;
+                continue
             setattr(new_instance, attr, value)
         print(new_instance.id)
         storage.save()
