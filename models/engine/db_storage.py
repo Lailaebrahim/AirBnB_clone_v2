@@ -36,7 +36,8 @@ class DBStorage:
          the eval function is used to convert the string to a class object"""
         obj_dict = {}
         if cls:
-            cls = globals().get(cls)
+            if type(cls) is str:
+                cls = eval(cls)
             query = self.__session.query(cls)
             for instance in query:
                 key = "{}.{}".format(type(instance).__name__, instance.id)
