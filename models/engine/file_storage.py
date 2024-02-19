@@ -9,7 +9,7 @@ class FileStorage:
     __objects = {}
 
     def all(self, cls=None):
-        """hat returns the list of objects of one type of class- it’s an optional filtering"""
+        """hat returns a dict of objects of one type of class- it’s an optional filtering"""
         if cls is None:
             return FileStorage.__objects
         else:
