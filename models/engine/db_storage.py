@@ -33,15 +33,17 @@ class DBStorage:
         The is operator checks if cls is a string, and if it is,
          the eval function is used to convert the string to a class object"""
         obj_dict = {}
-        if cls is not None and type(cls) is str:
-            cls = eval(cls)
-            for instance in self.__session.query(cls):
+        if cls:
+            cls = globals().get(cls)
+            query = self.__session.query(cls)
+            for instance in query:
                 key = "{}.{}".format(type(instance).__name__, instance.id)
                 obj_dict[key] = instance
         else:
             tables = [State, City, User, Place, Review, Amenity]
             for obj_class in tables:
-                for instance in self.__session.query(obj_class):
+                query = self.__session.query(obj_class)
+                for instance in query:
                     key = "{}.{}".format(type(instance).__name__, instance.id)
                     obj_dict[key] = instance
         return obj_dict
