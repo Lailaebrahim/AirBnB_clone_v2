@@ -139,9 +139,9 @@ class HBNBCommand(cmd.Cmd):
             except ValueError:
                 continue
         new_instance = HBNBCommand.classes[params[0]](**kw)
+        storage.new(new_instance)
         storage.save()
         print(new_instance.id)
-        print(self.do_all(params[0]))
 
 
     def help_create(self):
