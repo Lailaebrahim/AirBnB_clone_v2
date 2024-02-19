@@ -36,16 +36,16 @@ class DBStorage:
          the eval function is used to convert the string to a class object"""
         obj_dict = {}
         if cls:
-            if type(cls) is str:
+            if isinstance(cls, str):
                 cls = eval(cls)
-            query = self.__session.query(cls)
+            query = self.__session.query(cls).all()
             for instance in query:
                 key = "{}.{}".format(type(instance).__name__, instance.id)
                 obj_dict[key] = instance
         else:
             tables = [State, City, User, Place, Review, Amenity]
             for obj_class in tables:
-                query = self.__session.query(obj_class)
+                query = self.__session.query(obj_class).all()
                 for instance in query:
                     key = "{}.{}".format(type(instance).__name__, instance.id)
                     obj_dict[key] = instance
