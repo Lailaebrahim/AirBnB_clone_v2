@@ -123,8 +123,8 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
         for param in params[1:]:
-            kw = {}
             try:
+                kw = {}
                 attr, value = param.split("=")
                 attr = attr.strip()
                 if "\"" in value:

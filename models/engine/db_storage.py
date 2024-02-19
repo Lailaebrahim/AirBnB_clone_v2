@@ -19,12 +19,13 @@ class DBStorage:
 
     def __init__(self):
         """Class Constructor"""
-        use = os.getenv('HBNB_MYSQL_USER')
+        user = os.getenv('HBNB_MYSQL_USER')
         password = os.getenv('HBNB_MYSQL_PWD')
         host = os.getenv('HBNB_MYSQL_HOST')
         database = os.getenv('HBNB_MYSQL_DB')
         env = os.getenv('HBNB_ENV')
-        self.__engine = create_engine("mysql+mysqldb://hbnb_dev:hbnb_dev_pwd@localhost:3306/hbnb_dev_db",
+        self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'
+                                      .format(user, password, host, database),
                                       pool_pre_ping=True)
         if env == 'test':
             Base.metadata.drop_all(self.__engine)
@@ -52,12 +53,10 @@ class DBStorage:
     def new(self, obj):
         """add the object to the current database session"""
         self.__session.add(obj)
-        print("add called")
 
     def save(self):
         """commit all changes of the current database session """
         self.__session.commit()
-        print("commit called")
 
     def delete(self, obj=None):
         """delete from the current database session obj if not None"""
