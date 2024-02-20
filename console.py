@@ -122,6 +122,7 @@ class HBNBCommand(cmd.Cmd):
         elif params[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
+        kwargs = {}
         for param in params[1:]:
             try:
                 kw = {}
@@ -136,10 +137,11 @@ class HBNBCommand(cmd.Cmd):
                     else:
                         value = int(value)
                 kw[attr] = value
+                kwargs.update(kw)
             except ValueError:
                 continue
-        print(kw)
-        new_instance = HBNBCommand.classes[params[0]](**kw)
+        print(kwargs)
+        new_instance = HBNBCommand.classes[params[0]](**kwargs)
         storage.new(new_instance)
         storage.save()
         print(new_instance.id)
