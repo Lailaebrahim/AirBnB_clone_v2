@@ -138,6 +138,7 @@ class HBNBCommand(cmd.Cmd):
                 kw[attr] = value
             except ValueError:
                 continue
+        print(kw)
         new_instance = HBNBCommand.classes[params[0]](**kw)
         storage.new(new_instance)
         storage.save()
