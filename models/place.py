@@ -3,7 +3,6 @@
 import models
 from os import getenv
 from models.base_model import BaseModel, Base
-from models.amenity import Amenity
 from sqlalchemy import Column, String, Integer, Float, ForeignKey, Table
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
@@ -59,7 +58,7 @@ class Place(BaseModel, Base):
         @amenities.setter
         def amenities(self, obj):
             """handle appending an amenity_id to the amenities_ids list"""
-            if type(obj) is Amenity:
+            if type(obj) is Amenity and obj.id not in self.amenity_ids:
                 self.amenity_ids.append(obj.id)
             else:
                 pass
