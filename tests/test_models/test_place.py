@@ -65,8 +65,8 @@ class test_Place(test_basemodel):
         new = self.value()
         self.assertEqual(type(new.latitude), float)
 
-    @unittest.skipIf(getenv('HBNB_TYPE_STORAGE') == 'db',
-                     "Not Valid with DB storage")
+    @unittest.skipIf(getenv('HBNB_TYPE_STORAGE') != 'db',
+                     "Not Valid with File storage")
     def test_amenity_ids(self):
         """ """
         new = self.value()
