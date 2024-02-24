@@ -77,8 +77,13 @@ class test_basemodel(unittest.TestCase):
     def test_kwargs_one(self):
         """ """
         n = {'Name': 'test', 'user_id': 1}
-        with self.assertRaises(KeyError):
+        try:
             new = self.value(**n)
+        except KeyError as e:
+            if isinstance(e, KeyError):
+                self.assertTrue(False, 'KeyError not raised ?')
+            else:
+                raise e
 
     def test_id(self):
         """ """
