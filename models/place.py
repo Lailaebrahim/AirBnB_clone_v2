@@ -26,7 +26,6 @@ class Place(BaseModel, Base):
     price_by_night = Column(Integer, nullable=False, default=0)
     latitude = Column(Float, nullable=True)
     longitude = Column(Float, nullable=True)
-    amenity_ids = []
 
     if getenv('HBNB_TYPE_STORAGE') == 'db':
         reviews = relationship("Review", cascade='all, delete, delete-orphan',
@@ -35,6 +34,7 @@ class Place(BaseModel, Base):
                                  viewonly=False,
                                  back_populates="place_amenities")
     else:
+        amenity_ids = []
         @property
         def reviews(self):
             """the FileStorage relationship between Place and Review."""
