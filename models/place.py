@@ -35,6 +35,7 @@ class Place(BaseModel, Base):
                                  back_populates="place_amenities")
     else:
         amenity_ids = []
+
         @property
         def reviews(self):
             """the FileStorage relationship between Place and Review."""
