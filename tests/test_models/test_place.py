@@ -2,9 +2,11 @@
 """ """
 from tests.test_models.test_base_model import test_basemodel
 from models.place import Place
+from os import getenv
+import unittest
 
 
-class test_place(test_basemodel):
+class test_Place(test_basemodel):
     """ """
 
     def __init__(self, *args, **kwargs):
@@ -63,6 +65,8 @@ class test_place(test_basemodel):
         new = self.value()
         self.assertEqual(type(new.latitude), float)
 
+    @unittest.skipIf(getenv('HBNB_TYPE_STORAGE') == 'db',
+                     "Not Valid with DB storage")
     def test_amenity_ids(self):
         """ """
         new = self.value()
