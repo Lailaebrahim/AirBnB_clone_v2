@@ -48,12 +48,14 @@ class Place(BaseModel, Base):
 
         @property
         def amenities(self):
-            """Returns the list of Amenity instances based on the attribute amenity_ids
+            """Returns the list of Amenity instances based on
+            the attribute amenity_ids
             that contains all Amenity.id linked to the Place"""
             from models.__init__ import storage
             list_obj = []
             objs = storage.all('Amenity')
-            list_obj = [objs[obj_id] for obj_id in self.amenity_ids if obj_id in objs]
+            list_obj = [objs[obj_id] for obj_id in self.amenity_ids
+                        if obj_id in objs]
             return list_obj
 
         @amenities.setter
