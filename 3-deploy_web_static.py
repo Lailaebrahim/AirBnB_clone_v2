@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-"""Fabric script that archives and distributes web static to your web servers"""
+"""Fabric script that archives and
+   distributes web static to your web servers"""
 import os
 from fabric.api import run, put, env, local
 from datetime import datetime
@@ -54,6 +55,7 @@ def do_deploy(archive_path):
         return True
     except:
         return False
+
 
 def deploy():
     """Full Deployment."""
