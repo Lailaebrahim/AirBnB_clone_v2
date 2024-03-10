@@ -4,6 +4,7 @@ import os
 from fabric.api import run, put, env, local
 from datetime import datetime
 env.hosts = ['54.174.80.164', '54.161.236.106']
+tgz_created = None
 
 
 def do_pack():
@@ -56,7 +57,9 @@ def do_deploy(archive_path):
 
     def deploy():
         """Full Deployment."""
-        local_path = do_pack()
+        global tgz_created
+        if tgz_created is None:
+            tgz_created = local_path = do_pack()
         if local_path is None:
             return False
         else:
