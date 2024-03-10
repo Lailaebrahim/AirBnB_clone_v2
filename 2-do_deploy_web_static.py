@@ -11,6 +11,7 @@ env.priv_key = '~/etc/.ssh/id_rsa'
 
 def do_deploy(archive_path):
     """
+    Method Deploy Web statis Files to web servers
     """
 
     # Return False if archive doesn't exist
