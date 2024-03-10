@@ -16,16 +16,16 @@ def do_deploy(archive_path):
         archive = archive_path.split('/')[-1]
         arc = archive.split('.')[0]
         put(archive_path, "/tmp/")
-        #run('mkdir -p /data/web_static/releases/{}/'.format(arc))
-        #run('tar -xzf /tmp/{} -C /data/web_static/releases/{}/'
-        #    .format(archive, arc))
-        #run('rm -f /tmp/{}'.format(archive))
-        #run('mv /data/web_static/releases/{}/web_static/* /data/web_static/releases/'
-        #    .format(arc, arc))
-        #run('rm -rf /data/web_static/releases/{}/web_static/'.format(arc))
-        #run("rm -rf /data/web_static/current")
-        #run("ln -sf /data/web_static/releases/{}/  /data/web_static/current".
-        #    format(arc))
+        run('mkdir -p /data/web_static/releases/{}/'.format(arc))
+        run('tar -xzf /tmp/{} -C /data/web_static/releases/{}/'
+            .format(archive, arc))
+        run('rm -f /tmp/{}'.format(archive))
+        run('mv /data/web_static/releases/{}/web_static/* /data/web_static/releases/'
+            .format(arc, arc))
+        run('rm -rf /data/web_static/releases/{}/web_static/'.format(arc))
+        run("rm -rf /data/web_static/current")
+        run("ln -sf /data/web_static/releases/{}/  /data/web_static/current".
+            format(arc))
         return True
     except:
         return False
