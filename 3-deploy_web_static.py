@@ -16,7 +16,7 @@ def do_pack():
         Otherwise, it returns None.
     """
     if not os.path.exists("versions"):
-        os.makedirs("versions")
+        local("mkdir versions")
     now = datetime.now()
     archive_name = "web_static_" + now.strftime("%Y%m%d%H%M%S") + ".tgz"
     command = "tar -czvf versions/{} web_static".format(archive_name)
