@@ -59,9 +59,9 @@ def deploy():
     """Full Deployment."""
     global tgz_created
     if tgz_created is None:
-        tgz_created = local_path = do_pack()
-    if local_path is None:
+        tgz_created = do_pack()
+    if tgz_created is None:
         return False
     else:
-        status = do_deploy(local_path)
+        status = do_deploy(tgz_created)
         return status
