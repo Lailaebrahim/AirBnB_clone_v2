@@ -2,7 +2,7 @@
 """Fabric script  that distributes an archive to your web servers"""
 import os
 from fabric.api import *
-from fabric.api import put
+from fabric.api import put, run
 
 
 env.hosts = ['54.174.80.164', '54.161.236.106']
@@ -19,7 +19,7 @@ def do_deploy(archive_path):
     try:
         archive = archive_path.split('/')[-1]
         put("{}".format(archive_path), "/tmp/{}".format(archive))
-        #run('mkdir -p /data/web_static/releases/{}/'.format(archive.split('.')[0]))
+        run('mkdir -p /data/web_static/releases/{}/'.format(archive.split('.')[0]))
         #run('tar -xzf /tmp/{} -C /data/web_static/releases/{}/'
         #    .format(archive, archive.split('.')[0]))
         #run('rm -f /tmp/{}'.format(archive))
