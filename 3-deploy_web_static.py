@@ -55,13 +55,13 @@ def do_deploy(archive_path):
     except:
         return False
 
-    def deploy():
-        """Full Deployment."""
-        global tgz_created
-        if tgz_created is None:
-            tgz_created = local_path = do_pack()
-        if local_path is None:
-            return False
-        else:
-            status = do_deploy(local_path)
-            return status
+def deploy():
+    """Full Deployment."""
+    global tgz_created
+    if tgz_created is None:
+        tgz_created = local_path = do_pack()
+    if local_path is None:
+        return False
+    else:
+        status = do_deploy(local_path)
+        return status
