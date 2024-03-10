@@ -14,7 +14,7 @@ def do_deploy(archive_path):
     """
 
     # Return False if archive doesn't exist
-    if not os.path.exists(archive_path):
+    if os.path.isfile(archive_path) is False:
         return False
     try:
         archive = archive_path.split('/')[-1]
