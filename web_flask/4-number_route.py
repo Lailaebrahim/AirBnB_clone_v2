@@ -37,7 +37,7 @@ def python_route(text="is cool"):
 def n_route(n):
     """Return n +is a number if it's a number"""
     if isinstance(n, int):
-        return n + " is a number"
+        return str(n) + " is a number"
 
 
 if __name__ == '__main__':
