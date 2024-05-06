@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-   Module define the rout URL
+Module define the rout URL
 """
 
 
@@ -28,7 +28,7 @@ def c_route(text):
 
 @app.route('/python', strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
-def python_route(text default="is cool"):
+def python_route(text="is cool"):
     """Return C + text given"""
     return "Python " + text.replace("_", " ")
 
