@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """ State Module for HBNB project """
+import os
 import models
 from models.city import City
 from models.base_model import BaseModel, Base
@@ -15,14 +16,15 @@ class State(BaseModel, Base):
     cities = relationship("City", cascade='all, delete, delete-orphan',
                           backref="state")
 
-    @property
-    def cities(self):
-        """getter method cities to return the list of City objects 
+    if os.environ.get('HBNB_TYPE_STORAGE') != 'db':
+        @property
+        def cities(self):
+            """getter method cities to return the list of City objects 
            from storage linked to the current State."""
-        from models import storage
-        list_obj = []
-        objs = storage.all('City')
-        for key, val in objs.items():
-            if val.state_id == self.id:
-                list_obj.append(val)
-        return list_obj
+            from models import storage
+            list_obj = []
+            objs = storage.all('City')
+            for key, val in objs.items():
+                if val.state_id == self.id:
+                    list_obj.append(val)
+            return list_obj
