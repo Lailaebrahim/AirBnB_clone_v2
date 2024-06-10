@@ -13,18 +13,18 @@ class State(BaseModel, Base):
     """ State class """
     __tablename__ = 'states'
     name = Column(String(128), nullable=False)
-    cities = relationship("City", cascade='all, delete, delete-orphan',
+    if os.environ.get('HBNB_TYPE_STORAGE') == 'db':
+        cities = relationship("City", cascade='all, delete, delete-orphan',
                           backref="state")
-
-    if os.environ.get('HBNB_TYPE_STORAGE') != 'db':
+    else:
         @property
         def cities(self):
-            """getter method cities to return the list of City objects 
-           from storage linked to the current State."""
-            from models import storage
-            list_obj = []
-            objs = storage.all('City')
-            for key, val in objs.items():
-                if val.state_id == self.id:
-                    list_obj.append(val)
-            return list_obj
+            """
+                getter method, returns list of City objs from storage
+                linked to the current State
+            """
+            city_list = []
+            for city in models.storage.all("City").values():
+                if city.state_id == self.id:
+                    city_list.append(city)
+            return city_list
