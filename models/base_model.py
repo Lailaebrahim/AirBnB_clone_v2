@@ -1,10 +1,15 @@
 #!/usr/bin/python3
 """This module defines a base class for all models in our hbnb clone"""
+from os import getenv
 import uuid
 from datetime import datetime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, String, DateTime
-Base = declarative_base()
+if getenv('HBNB_TYPE_STORAGE') == 'db':
+    Base = declarative_base()
+else:
+    class Base:
+        pass
 
 
 class BaseModel:
@@ -32,9 +37,11 @@ class BaseModel:
             self.created_at = self.updated_at = datetime.now()
 
     def __str__(self):
-        """Returns a string representation of the instance"""
-        cls = (str(type(self)).split('.')[-1]).split('\'')[0]
-        return '[{}] ({}) {}'.format(cls, self.id, self.__dict__)
+        """
+        Represent the object in a human-readable way.
+        :return: string representation of the object.
+        """
+        return "[{}] ({}) {}".format(type(self).__name__, self.id, self.__dict__)
 
     def save(self):
         """Updates updated_at with current time when instance is changed"""
@@ -44,13 +51,17 @@ class BaseModel:
         storage.save()
 
     def to_dict(self):
-        """Convert instance into dict format"""
+        """
+        Method to return the dict representation of the obj
+        Adding a new key/value __class__ that store the name
+        of the class of obj
+        And formatting the created_at and updated_at by ISO format for time.
+        :return: A dictionary representation the object
+        """
         my_dict = self.__dict__.copy()
         my_dict["__class__"] = type(self).__name__
-        my_dict['created_at'] = self.created_at.isoformat()
-        my_dict['updated_at'] = self.updated_at.isoformat()
-        if '_sa_instance_state' in my_dict.keys():
-            del my_dict['_sa_instance_state']
+        my_dict["created_at"] = my_dict["created_at"].isoformat()
+        my_dict["updated_at"] = my_dict["updated_at"].isoformat()
         return my_dict
 
     def delete(self):
