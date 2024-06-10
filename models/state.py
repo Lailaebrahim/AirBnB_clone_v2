@@ -17,6 +17,8 @@ class State(BaseModel, Base):
 
     @property
     def cities(self):
+        """getter method cities to return the list of City objects 
+           from storage linked to the current State."""
         from models import storage
         list_obj = []
         objs = storage.all('City')
