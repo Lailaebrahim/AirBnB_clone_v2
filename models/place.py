@@ -15,6 +15,7 @@ place_amenity = Table("place_amenity", Base.metadata,
                       Column("amenity_id", Integer, ForeignKey("amenities.id"),
                              primary_key=True, nullable=False))
 
+
 class Place(BaseModel, Base):
     """ A place to stay """
     __tablename__ = 'places'
@@ -66,3 +67,4 @@ class Place(BaseModel, Base):
             self.amenity_ids.append(obj.id)
         else:
             pass
+
