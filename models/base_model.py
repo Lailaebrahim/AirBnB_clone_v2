@@ -41,7 +41,8 @@ class BaseModel:
         Represent the object in a human-readable way.
         :return: string representation of the object.
         """
-        return "[{}] ({}) {}".format(type(self).__name__, self.id, self.__dict__)
+        return "[{}] ({}) {}".format(type(self).__name__, self.id,
+                                     self.__dict__)
 
     def save(self):
         """Updates updated_at with current time when instance is changed"""

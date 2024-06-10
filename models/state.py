@@ -18,6 +18,7 @@ class State(BaseModel, Base):
                               backref="state")
     else:
         name = ''
+
         @property
         def cities(self):
             """Get a list of all related City objects."""
