@@ -13,4 +13,4 @@ class Amenity(BaseModel, Base):
     if getenv('HBNB_TYPE_STORAGE') == 'db':
         from models.place import place_amenity
         place_amenities = relationship("Place", secondary=place_amenity,
-                                   back_populates="amenities")
+                                       back_populates="amenities")
