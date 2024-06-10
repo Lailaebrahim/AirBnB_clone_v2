@@ -11,19 +11,18 @@ from sqlalchemy.ext.declarative import declarative_base
 
 class State(BaseModel, Base):
     """ State class """
-    __tablename__ = 'states'
-    name = Column(String(128), nullable=False)
     if getenv('HBNB_TYPE_STORAGE') == 'db':
+        __tablename__ = 'states'
+        name = Column(String(128), nullable=False)
         cities = relationship("City", cascade='all, delete, delete-orphan',
                               backref="state")
     else:
-
+        name = ''
         @property
         def cities(self):
-            from models import storage
-            list_obj = []
-            objs = storage.all('City')
-            for key, val in objs.items():
-                if val.state_id == self.id:
-                    list_obj.append(val)
-            return list_obj
+            """Get a list of all related City objects."""
+            city_list = []
+            for city in list(models.storage.all(City).values()):
+                if city.state_id == self.id:
+                    city_list.append(city)
+            return city_list
